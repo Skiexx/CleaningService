@@ -1,0 +1,52 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:CleaningService.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="400"
+        CanResize="False" Width="300" Height="400"
+        x:Class="CleaningService.Views.RegistrationWindow"
+        Icon="/Assets/app.ico"
+        Title="Регистрация"
+        Name="Window">
+    
+    <Design.DataContext>
+        <vm:RegistrationWindowViewModel/>
+    </Design.DataContext>
+    
+    <StackPanel Orientation="Vertical"
+                Spacing="15" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="Регистрация" 
+                   FontSize="22" FontWeight="Black"
+                   HorizontalAlignment="Center"/>
+        <TextBox Watermark="Логин" Width="200" 
+                 Text="{Binding User.Login}"
+                 HorizontalContentAlignment="Center"/>
+        <TextBox Watermark="Пароль" Width="200" 
+                 Text="{Binding User.Password}"
+                 HorizontalContentAlignment="Center"
+                 PasswordChar="*"/>
+        <TextBox Watermark="Имя" Width="200" 
+                 Text="{Binding User.FirstName}"
+                 HorizontalContentAlignment="Center"/>
+        <TextBox Watermark="Фамилия" Width="200" 
+                 Text="{Binding User.LastName}"
+                 HorizontalContentAlignment="Center"/>
+        <TextBox Watermark="Отчество" Width="200" 
+                 Text="{Binding User.MiddleName}"
+                 HorizontalContentAlignment="Center"/>
+        <TextBox Watermark="Номер телефона" Width="200" 
+                 Text="{Binding User.PhoneNumber}"
+                 HorizontalContentAlignment="Center"/>
+        <StackPanel Orientation="Horizontal"
+                    Spacing="15"
+                    HorizontalAlignment="Center">
+            <Button Content="Зарегестрироваться"
+                    Command="{Binding RegistrationCommand}"
+                    CommandParameter="{Binding ElementName=Window}"/>
+            <Button Content="Назад"
+                    Command="{Binding ExitCommand}"
+                    CommandParameter="{Binding ElementName=Window}"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
