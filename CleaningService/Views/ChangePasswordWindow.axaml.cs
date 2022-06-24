@@ -1,15 +1,15 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using CleaningService.ViewModels;
 
 namespace CleaningService.Views;
 
-public partial class UserWindow : Window
+public partial class ChangePasswordWindow : Window
 {
-    public UserWindow()
+    public ChangePasswordWindow()
     {
-        DataContext = new UserWindowViewModel();
+        DataContext = new ChangePasswordViewModel();
         ShowInTaskbar = true;
         InitializeComponent();
 #if DEBUG

@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using CleaningService.ViewModels;
 
 namespace CleaningService.Views
 {
@@ -6,6 +7,8 @@ namespace CleaningService.Views
     {
         public MainWindow()
         {
+            DataContext = new MainWindowViewModel();
+            ShowInTaskbar = true;
             InitializeComponent();
         }
     }

@@ -13,16 +13,17 @@ namespace CleaningService.ViewModels;
 
 public class RegistrationWindowViewModel : ViewModelBase
 {
+    private User _user = new();
+
     public RegistrationWindowViewModel()
     {
         RegistrationCommand = ReactiveCommand.Create<Window>(RegistrationCommandImpl);
         ExitCommand = ReactiveCommand.Create<Window>(ExitCommandImpl);
     }
-    private User _user = new User();
 
     public User User
     {
-        get => _user; 
+        get => _user;
         set => this.RaiseAndSetIfChanged(ref _user, value);
     }
 
@@ -31,11 +32,11 @@ public class RegistrationWindowViewModel : ViewModelBase
 
     private void RegistrationCommandImpl(Window window)
     {
-        if (User.Login == null || 
-            User.Password == null || 
-            User.PhoneNumber == null || 
+        if (User.Login == null ||
+            User.Password == null ||
+            User.PhoneNumber == null ||
             User.FirstName == null ||
-            User.LastName == null || 
+            User.LastName == null ||
             User.MiddleName == null)
         {
             MessageBoxManager
@@ -46,24 +47,27 @@ public class RegistrationWindowViewModel : ViewModelBase
 
         try
         {
-            User.IdRole = Connector.GetContext().Roles.FirstOrDefault(role => role.Title == "Клиент")!.Id;
+            User.IdRoleNavigation = Connector.GetContext().Roles.FirstOrDefault(role => role.Title == "Пользователь")!;
             Connector.GetContext().Users.Add(User);
             Connector.GetContext().SaveChanges();
+            MainWindowViewModel.Login = User.Login;
             MessageBoxManager.GetMessageBoxStandardWindow("Успешно",
                     "Ползователь успешно зарегестрирован")
-                .ShowDialog(window);
-            MainWindowViewModel.Login = User.Login;
-            new MainWindow().Show();
-            window.Close();
+                .ShowDialog(window).GetAwaiter().OnCompleted(() =>
+                {
+                    new MainWindow().Show();
+                    window.Close();
+                });
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             MessageBoxManager.GetMessageBoxStandardWindow("Ошибка",
                     "Такой логин уже существует! ",
                     ButtonEnum.Ok,
                     Icon.Error)
-                .ShowDialog(window);
-            Connector.ReloadContext();
+                .ShowDialog(window)
+                .GetAwaiter()
+                .OnCompleted(Connector.ReloadContext);
         }
     }
 

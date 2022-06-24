@@ -2,6 +2,7 @@
 using System.Reactive;
 using Avalonia.Controls;
 using CleaningService.Core;
+using CleaningService.Models;
 using CleaningService.Views;
 using MessageBox.Avalonia;
 using MessageBox.Avalonia.Enums;
@@ -17,6 +18,8 @@ namespace CleaningService.ViewModels
             RegistrationCommand = ReactiveCommand.Create<Window>(RegistrationCommandImpl);
         }
 
+        public static User AuthorizedUser { get; set; } = null!;
+
         public static string? Login { get; set; }
 
         public string? Password { get; set; }
@@ -26,17 +29,29 @@ namespace CleaningService.ViewModels
 
         private void EnterCommandImpl(Window window)
         {
-            var user = Connector.GetContext().Users.FirstOrDefault(u => u.Login.Equals(Login) && u.Password.Equals(Password));
+            var user = Connector.GetContext().Users.FirstOrDefault(u => u.Login.Equals(Login));
             if (user == null)
             {
                 MessageBoxManager.GetMessageBoxStandardWindow("Ошибка", "Пользователь не найден! ", ButtonEnum.Ok,
-                    Icon.Error).Show();
+                    Icon.Error).ShowDialog(window);
                 return;
             }
+
+            if (!user.Password.Equals(Password))
+            {
+                MessageBoxManager.GetMessageBoxStandardWindow("Ошибка",
+                        "Введеный пароль неверный, повторите попытку",
+                        ButtonEnum.Ok,
+                        Icon.Error)
+                    .ShowDialog(window);
+                return;
+            }
+
+            AuthorizedUser = user;
             new UserWindow().Show();
             window.Close();
         }
-        
+
         private void RegistrationCommandImpl(Window window)
         {
             new RegistrationWindow().Show();

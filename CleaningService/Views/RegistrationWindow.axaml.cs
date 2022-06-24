@@ -10,6 +10,7 @@ public partial class RegistrationWindow : Window
     public RegistrationWindow()
     {
         DataContext = new RegistrationWindowViewModel();
+        ShowInTaskbar = true;
         InitializeComponent();
 #if DEBUG
         this.AttachDevTools();

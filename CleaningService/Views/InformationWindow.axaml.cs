@@ -1,15 +1,15 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using CleaningService.ViewModels;
 
 namespace CleaningService.Views;
 
-public partial class UserWindow : Window
+public partial class InformationWindow : Window
 {
-    public UserWindow()
+    public InformationWindow()
     {
-        DataContext = new UserWindowViewModel();
+        DataContext = new InformationViewModel();
         ShowInTaskbar = true;
         InitializeComponent();
 #if DEBUG

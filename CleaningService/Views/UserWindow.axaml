@@ -3,16 +3,45 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="using:CleaningService.ViewModels"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="250" d:DesignHeight="280"
+        Width="250" Height="280" CanResize="False"
+        WindowStartupLocation="CenterScreen"
         x:Class="CleaningService.Views.UserWindow"
         Icon="/Assets/app.ico"
-        Title="Главное меню">
-    
+        Title="Главное меню"
+        Name="Window">
     <Design.DataContext>
         <vm:UserWindowViewModel/>
     </Design.DataContext>
-    
-    <StackPanel>
         
+    <StackPanel Orientation="Vertical" Spacing="15"
+                HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="Главное меню" HorizontalAlignment="Center"
+                   FontSize="22" FontWeight="Black"/>
+        <Button Content="Профиль"
+                HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                Width="130" Height="30"
+                Command="{Binding ProfileCommand}"
+                CommandParameter="{Binding ElementName=Window}"/>
+        <Button Content="Информация"
+                HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                Width="130" Height="30"
+                Command="{Binding InformationCommand}"
+                CommandParameter="{Binding ElementName=Window}"/>
+        <Button Content="Заказы"
+                HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                Width="130" Height="30"
+                Command="{Binding OrdersCommand}"
+                CommandParameter="{Binding ElementName=Window}"/>
+        <Button Content="Сделать заказ"
+                HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                Width="130" Height="30"
+                Command="{Binding CreateOrderCommand}"
+                CommandParameter="{Binding ElementName=Window}"/>
+        <Button Content="Выйти"
+                HorizontalAlignment="Center" HorizontalContentAlignment="Center"
+                Width="130" Height="30"
+                Command="{Binding ExitCommand}"
+                CommandParameter="{Binding ElementName=Window}"/>
     </StackPanel>
 </Window>

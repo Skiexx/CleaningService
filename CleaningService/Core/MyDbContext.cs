@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CleaningService.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using CleaningService.Models;
 
 namespace CleaningService.Core
 {
@@ -25,11 +22,9 @@ namespace CleaningService.Core
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=localhost;Database=CleaningService;User=sa;Password=qweASD123");
-                optionsBuilder.UseLazyLoadingProxies();
-            }
+            if (optionsBuilder.IsConfigured) return;
+            optionsBuilder.UseSqlServer("Server=localhost;Database=CleaningService;User=sa;Password=qweASD123");
+            optionsBuilder.UseLazyLoadingProxies();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -73,10 +68,7 @@ namespace CleaningService.Core
                 entity.Property(e => e.Sum).HasColumnType("money");
             });
 
-            modelBuilder.Entity<Role>(entity =>
-            {
-                entity.Property(e => e.Title).HasMaxLength(100);
-            });
+            modelBuilder.Entity<Role>(entity => { entity.Property(e => e.Title).HasMaxLength(100); });
 
             modelBuilder.Entity<User>(entity =>
             {

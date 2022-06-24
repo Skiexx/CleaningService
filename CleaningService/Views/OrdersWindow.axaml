@@ -1,0 +1,67 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="using:CleaningService.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        CanResize="False" Width="800" Height="450"
+        WindowStartupLocation="CenterScreen"
+        x:Class="CleaningService.Views.OrdersWindow"
+        Icon="/Assets/app.ico"
+        Title="История заказов"
+        Name="Window">
+    
+    <Design.DataContext>
+        <vm:OrdersViewModel/>
+    </Design.DataContext>
+    
+    <Grid ColumnDefinitions="250,*">
+        <StackPanel Spacing="10" Margin="15">
+            <TextBlock Text="Номера заказов" FontSize="22" FontWeight="Black"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ListBox Items="{Binding OrdersDataGrid}"
+                     SelectedItem="{Binding SelectedOrder}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Id}" FontSize="16"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </StackPanel>
+        <Grid Grid.Column="1" RowDefinitions="*,60">
+            <StackPanel Grid.Row="0"
+                        Margin="20"
+                        Spacing="15"
+                        HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Номер заказа: " FontSize="16"/>
+                    <TextBlock Text="{Binding SelectedOrder.Id}" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Размер квартиры в М2: " FontSize="16"/>
+                    <TextBlock Text="{Binding SelectedOrder.CleanSizeM2}" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Тип уборки: " FontSize="16"/>
+                    <TextBlock Text="{Binding SelectedOrder.IdCleanPriceNavigation.Title}" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Цена за М2: " FontSize="16"/>
+                    <TextBlock Text="{Binding SelectedOrder.IdCleanPriceNavigation.PriceForM2}" FontSize="16"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="Сумма заказа: " FontSize="16"/>
+                    <TextBlock Text="{Binding SelectedOrder.IdPayListNavigation.Sum}" FontSize="16"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="1"
+                        Orientation="Horizontal" Spacing="10"
+                        HorizontalAlignment="Left" VerticalAlignment="Center"
+                        Margin="15">
+                <Button Content="Вернуться"
+                        Command="{Binding ExitCommand}"
+                        CommandParameter="{Binding ElementName=Window}"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

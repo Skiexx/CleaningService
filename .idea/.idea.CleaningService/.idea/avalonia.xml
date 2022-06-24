@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="CleaningService/App.axaml" value="CleaningService/CleaningService.csproj" />
+        <entry key="CleaningService/Views/ChangePasswordWindow.axaml" value="CleaningService/CleaningService.csproj" />
+        <entry key="CleaningService/Views/CreateOrderWindow.axaml" value="CleaningService/CleaningService.csproj" />
+        <entry key="CleaningService/Views/InformationWindow.axaml" value="CleaningService/CleaningService.csproj" />
+        <entry key="CleaningService/Views/MainWindow.axaml" value="CleaningService/CleaningService.csproj" />
+        <entry key="CleaningService/Views/OrdersWindow.axaml" value="CleaningService/CleaningService.csproj" />
+        <entry key="CleaningService/Views/ProfileWindow.axaml" value="CleaningService/CleaningService.csproj" />
+        <entry key="CleaningService/Views/RegistrationWindow.axaml" value="CleaningService/CleaningService.csproj" />
+        <entry key="CleaningService/Views/UserWindow.axaml" value="CleaningService/CleaningService.csproj" />
+      </map>
+    </option>
+  </component>
+</project>
